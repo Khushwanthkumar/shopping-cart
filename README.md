@@ -1,6 +1,6 @@
 # Shopping Cart
 
-This is a Flask web application for a shopping cart that enables customers to add items to the cart, checkout, and view order information.
+This code implements a simple e-commerce website with a shopping cart and checkout functionality, as well as several administrative APIs for retrieving information about the orders, items, and discounts. The code uses the Flask framework to handle HTTP requests and responses.
 
 ## Features
 
