@@ -98,7 +98,7 @@ To checkout and place an order, make a POST request to /checkout endpoint with a
 
 To retrieve information using the admin APIs, make a GET request to the respective endpoint. For example, to retrieve the count of items purchased, make a GET request to `/admin/items_count`.
 
-Note: The admin APIs are protected and can only be accessed by authorized users.
+Note: The admin APIs are protected and can only be accessed by authorized users in real-life sceanrio you can implement the jwt authorization at the end of main.py for implementation by updating the keys.
 
 ## Conclusion
 
