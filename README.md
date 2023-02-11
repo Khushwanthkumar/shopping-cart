@@ -64,7 +64,7 @@ python main.py
 
 The following endpoints are available:
 
-* `/add_to_cart` - API to add items to the cart.
+* `/add_to_cart` - API to add item to the cart.
 * `/checkout` - API to checkout and place an order.
 * `/admin/items_count` - Admin API to retrieve the count of items purchased.
 * `/admin/total_purchase_amount` - Admin API to retrieve the total purchase amount.
@@ -78,10 +78,9 @@ The following endpoints are available:
  To add an item to the cart, make a POST request to /add_to_cart endpoint with a JSON payload:
 
  ```
- {
-    "item_id": 1,
-    "item_name": "item1",
-    "price": 100
+{
+    "name": <item name>,
+    "price": <item price>
 }
 ```
 
@@ -91,8 +90,7 @@ To checkout and place an order, make a POST request to /checkout endpoint with a
 
 ```
 {
-    "customer_name": "John Doe",
-    "email": "johndoe@example.com"
+    "discount_code": <discount code>
 }
 ```
 

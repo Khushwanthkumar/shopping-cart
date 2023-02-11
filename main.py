@@ -21,7 +21,7 @@ def generate_discount_code():
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
     """
-    API to add items to the cart.
+    API to add item to the cart.
     Expects a JSON request with the following format:
         {
             "name": <item name>,
@@ -142,7 +142,65 @@ if __name__ == "__main__":
 # Validate the discount code input in the checkout API and return an error message if it's invalid. -- done
 # Add error handling for the case where the price of the item in the add_to_cart API is not a valid number. -- done
 # Check if the cart is empty before calculating the total purchase amount and total discount amount. -- done
-# Add authentication and authorization for the admin APIs to prevent unauthorized access.
+# Add authentication and authorization for the admin APIs to prevent unauthorized access. -- jwt authorization can be used as below to keep in check the of unauthorized users as below
 
+    # app.config['SECRET_KEY'] = 'secret-key'  # Change this to your own secret key
+
+    # @app.route('/login', methods=['POST'])
+    # def login():
+    #     # Authenticate the user and return a JWT token if the authentication is successful
+    #     # In a real-world scenario, this should be replaced with your own authentication logic
+    #     auth = request.authorization
+    #     if auth and auth.username == 'admin' and auth.password == 'password':
+    #         token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
+    #                           app.config['SECRET_KEY'])
+    #         return jsonify({'token': token.decode('UTF-8')})
+    #     return jsonify({'message': 'Invalid credentials'}), 401
+
+    # def check_for_token(func):
+    #     def wrapper(*args, **kwargs):
+    #         token = request.args.get('token') or request.headers.get('Authorization')
+    #         if not token:
+    #             return jsonify({'message': 'Token is missing'}), 401
+    #         try:
+    #             data = jwt.decode(token, app.config['SECRET_KEY'])
+    #         except:
+    #             return jsonify({'message': 'Token is invalid'}), 401
+    #         return func(*args, **kwargs)
+    #     return wrapper
+
+# To use this decorator, we added it to each of the admin end
 
 # "nth order" refers to an order that is the nth order placed by a customer. For example, if a customer places 10 orders, the 10th order would be referred to as the "10th order." In the above code, the variable "order_counter" is being used to track the number of orders that have been placed and the value of "order_counter" is incremented each time a customer places an order. If the value of "order_counter" is divisible by 3, a discount code is generated for the customer and added to the list of discount codes.
+
+#we can even add a opentracing to the above each api for jeager tracing based on the requriements as below.
+    # from flask_opentracing import FlaskTracer
+    # from jaeger_client import Config
+    # # Initializing the Jaeger tracer
+    # config = Config(
+    #     config={
+    #         'sampler': {
+    #             'type': 'const',
+    #             'param': 1,
+    #         },
+    #         'logging': True,
+    #     },
+    #     service_name='cart-service'
+    # )
+    # jaeger_tracer = config.initialize_tracer()
+    # opentracing.tracer = jaeger_tracer
+
+    # # Flask tracer to integrate Flask with OpenTracing
+    # flask_tracer = FlaskTracer(jaeger_tracer, app)
+
+    # # Admin API to list count of items purchased
+    # @app.route('/admin/items_count', methods=['GET'])
+    # def items_count():
+    #     """
+    #     Admin API to retrieve the count of items purchased.
+    #     """
+    #     # Adding OpenTracing span to track the duration of the function
+    #     with jaeger_tracer.start_active_span('items_count') as scope:
+    #         count = len(cart)
+    #         scope.span.log_kv({'event': 'items_count', 'count': count})
+    #         return jsonify({"count": count})
