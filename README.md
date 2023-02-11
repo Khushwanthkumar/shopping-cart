@@ -37,6 +37,17 @@ pip install flask
 4. Run the application:
 
 ```
-python app.py
+python main.py
 ```
+
+## Endpoints
+
+The following endpoints are available:
+
+* /add_to_cart - API to add items to the cart.
+* /checkout - API to checkout and place an order.
+* /admin/items_count - Admin API to retrieve the count of items purchased.
+* /admin/total_purchase_amount - Admin API to retrieve the total purchase amount.
+* /admin/discount_codes - Admin API to retrieve the list of discount codes.
+* /admin/total_discount_amount - Admin API to retrieve the total discount amount.
 
