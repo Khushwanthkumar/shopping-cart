@@ -18,3 +18,25 @@ This is a Flask web application for a shopping cart that enables customers to ad
 
 1. Clone the repository:
 
+```
+git clone https://github.com/Khushwanthkumar/shopping-cart.git
+```
+
+2. Navigate to the directory:
+
+```
+cd shopping-cart
+```
+
+3. Install the dependencies:
+
+```
+pip install flask
+```
+
+4. Run the application:
+
+```
+python app.py
+```
+
